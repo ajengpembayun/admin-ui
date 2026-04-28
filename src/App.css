@@ -9,6 +9,8 @@ html {
 @theme {
   --font-body: "Inter", sans-serif;
   --font-poppins: "Poppins", sans-serif;
+/* Tambahan baru*/
+  --color-special-red2: #b83016;
 
   --color-primary:#299d91;
   --color-secondary: #525256;

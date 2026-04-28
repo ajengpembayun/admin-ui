@@ -1,6 +1,7 @@
 import "./App.css";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import PostCard from "./PostCard";
 
 function App() {
   const [showPassword, setShowPassword] = useState(false);
@@ -102,6 +103,22 @@ function App() {
         </div>
 
       </div>
+
+      {/* POST CARD SECTION */}
+    <div className="mt-16 w-full px-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <PostCard
+        title="Ea Molestias Quasi"
+        body="Isi konten post disini bro"
+      />
+      <PostCard
+        title="Post Kedua"
+        body="Lorem ipsum dolor sit amet"
+      />
+      <PostCard
+        title="Post Ketiga"
+        body="Testing aja dulu"
+      />
+    </div>
     </main>
   );
 }
