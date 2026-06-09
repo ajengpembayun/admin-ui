@@ -1,26 +1,28 @@
-import React from "react";
-
-function Button(props) {  
-	const { children, type = "submit", variant = "primary" } = props;
-	
-  const baseClasses = "h-12 rounded-md text-sm w-full";  
-	const variantClasses = {    
-		    primary:
-            "bg-[var(--color-primary)] text-white",
-
-            secondary:
-            "bg-[var(--color-gray-05)] text-[var(--color-gray-02)]",  
-                };
-	
-  const finalClasses = `${baseClasses} ${variantClasses[variant] || variantClasses.primary}`;
-  
-	return (    
-		<>      
-			<button className={finalClasses} type={type}>        
-				{children}      
-			</button>    
-		</>  
+function Button(props) {
+	const {
+	  children,
+	  type = "submit",
+	  variant = "primary",
+	} = props;
+  
+	const baseClasses =
+	  "h-12 rounded-md text-sm w-full flex items-center justify-center border";
+  
+	  const variantClasses = {
+		primary: "bg-[#299d91] text-white",
+		secondary: "bg-[#e8e8e8] text-[#878787]",
+	  };
+  
+	return (
+	  <button
+		className={`${baseClasses} ${
+		  variantClasses[variant]
+		}`}
+		type={type}
+	  >
+		{children}
+	  </button>
 	);
-}
-
-export default Button;
+  }
+  
+  export default Button;

@@ -1,12 +1,7 @@
-import "./App.css";
-import SignIn from "./pages/signIn";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  return (
-    <>
-      <SignIn />
-    </>
-  );
+  return <Dashboard />;
 }
 
 export default App;
