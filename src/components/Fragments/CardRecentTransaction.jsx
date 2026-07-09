@@ -1,10 +1,12 @@
-import React, {useState} from "react";
+import React, { useContext, useState} from "react";
 import Card from "../Card";
+import { ThemeContext } from "../../context/themeContext";
 
 function CardRecentTransaction(props) {
     const { data } = props;
     const tabs = ["All", "Revenue", "Expense"];
     const [active, setActive] = useState("All");
+    const { theme } = useContext(ThemeContext);
 
     const filteredData =
     active === "All" ? data : data.filter((item) => item.type === active);
@@ -18,17 +20,24 @@ function CardRecentTransaction(props) {
                 <div className="mb-4">
                   {tabs.map((tab) => (
                     <button
-                      key={tab}
-                      className={
-                        active === tab
-                          ? "px-4 font-bold text-[#299d91] border-b-4 border-[#299d91]"
-                          : "px-4 font-bold text-[#9f9f9f]"
-                      }
-                      onClick={() => setActive(tab)}
-                      value={tab}
-                    >
-                      {tab}
-                    </button>
+                    key={tab}
+                    onClick={() => setActive(tab)}
+                    className={
+                      active === tab
+                        ? "px-4 font-bold border-b-4"
+                        : "px-4 font-bold text-gray-01"
+                    }
+                    style={
+                      active === tab
+                        ? {
+                            color: theme.color,
+                            borderColor: theme.color,
+                          }
+                        : {}
+                    }
+                  >
+                    {tab}
+                  </button>
                   ))}
                 </div>
                 {filteredData.map((item) => (

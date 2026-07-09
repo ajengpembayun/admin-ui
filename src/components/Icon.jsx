@@ -18,9 +18,19 @@ import MovieSVG from "../assets/icons/Movie.svg?react";
 import OtherSVG from "../assets/icons/Others.svg?react";
 import ShoppingSVG from "../assets/icons/Shopping.svg?react";
 import TransportSVG from "../assets/icons/Trasnport.svg?react";
+
 import ArrowRightSVG from "../assets/icons/arrow-right.svg?react";
 import ArrowDownSVG from "../assets/icons/Downarrow.svg?react";
 import ArrowUpSVG from "../assets/icons/Uparrow.svg?react";
+import ArrowUpRightSVG from "../assets/icons/arrow-up-right.svg?react";
+
+import EditSVG from "../assets/icons/edit.svg?react";
+
+import MastercardSVG from "../assets/icons/Mastercard-Logo 1.svg?react";
+import VisaSVG from "../assets/icons/Visa_Logo 1.svg?react";
+
+import TargetSVG from "../assets/icons/octicon_goal-16.svg?react";
+import AwardSVG from "../assets/icons/Frame 39997.svg?react";
 
 const Icon = {
   Overview: ({ size = 24, color = "currentColor", ...props }) => (
@@ -60,7 +70,12 @@ const Icon = {
   ),
 
   Logout: ({ size = 24, color = "currentColor", ...props }) => (
-    <LogoutSVG width={size} height={size} stroke={color} {...props} />
+    <LogoutSVG
+      width={size}
+      height={size}
+      style={{ color }}
+      {...props}
+    />
   ),
 
   Adobe: ({ size = 24, color = "currentColor", ...props }) => (
@@ -109,6 +124,30 @@ const Icon = {
 
   ArrowUp: ({ size = 24, color = "currentColor", ...props }) => (
     <ArrowUpSVG width={size} height={size} stroke={color} {...props} />
+  ),
+
+  ArrowUpRight: ({ size = 24, color = "currentColor", ...props }) => (
+    <ArrowUpRightSVG width={size} height={size} stroke={color} {...props} />
+  ),
+
+  Edit: ({ size = 24, color = "currentColor", ...props }) => (
+    <EditSVG width={size} height={size} stroke={color} {...props} />
+  ),
+
+  Mastercard: ({ size = 24, color = "currentColor", ...props }) => (
+    <MastercardSVG width={size} height={size} {...props} />
+  ),
+
+  Visa: ({ size = 24, color = "currentColor", ...props }) => (
+    <VisaSVG width={size} height={size} {...props} />
+  ),
+
+  Target: ({ size = 24, color = "currentColor", ...props }) => (
+    <TargetSVG width={size} height={size} stroke={color} {...props} />
+  ),
+
+  Award: ({ size = 24, color = "currentColor", ...props }) => (
+    <AwardSVG width={size} height={size} stroke={color} {...props} />
   ),
 };
 

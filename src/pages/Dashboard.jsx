@@ -10,6 +10,9 @@ import {
   transactions,
   bills,
   expensesBreakdowns,
+  balances,
+  goals,
+  expensesStatistics,
 } from "../data";
 
 function Dashboard() {
@@ -19,11 +22,11 @@ function Dashboard() {
       <div className="grid gap-6 sm:grid-cols-12 ">
 
         <div className="sm:col-span-4">
-          <CardBalance />
+        <CardBalance data={balances} />
         </div>
 
         <div className="sm:col-span-4">
-          <CardGoal />
+        <CardGoal data={goals} />
         </div>
 
         <div className="sm:col-span-4">
@@ -35,7 +38,7 @@ function Dashboard() {
         </div>
 
         <div className="sm:col-span-8">
-          <CardStatistic />
+        <CardStatistic data={expensesStatistics} />
         </div>
 
         <div className="sm:col-span-8">

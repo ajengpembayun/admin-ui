@@ -1,4 +1,8 @@
+import React, { useContext } from "react";
+import { ThemeContext } from "../context/themeContext";
+
 function Button(props) {
+	const { theme } = useContext(ThemeContext);
 	const {
 	  children,
 	  type = "submit",
@@ -14,11 +18,9 @@ function Button(props) {
 	  };
   
 	return (
-	  <button
-		className={`${baseClasses} ${
-		  variantClasses[variant]
-		}`}
-		type={type}
+		<button
+		className="text-white rounded-md py-3 w-full"
+		style={{ backgroundColor: theme.color }}
 	  >
 		{children}
 	  </button>

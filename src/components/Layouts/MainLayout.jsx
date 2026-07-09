@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import Logo from "../Logo";
 import Input from "../Input";
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsIcon from "@mui/icons-material/Notifications";
 import Icon from "../Icon";
 import { NavLink } from "react-router-dom";
-
+import { ThemeContext } from "../../context/themeContext";
 
 function MainLayout(props) {
   const { children } = props;
+
+  const themes = [
+    { name: "theme-green", bgcolor: "bg-[#299D91]", color: "#299D91" },
+    { name: "theme-blue", bgcolor: "bg-[#1E90FF]", color: "#1E90FF" },
+    { name: "theme-purple", bgcolor: "bg-[#6A5ACD]", color: "#6A5ACD" },
+    { name: "theme-pink", bgcolor: "bg-[#DB7093]", color: "#DB7093" },
+    { name: "theme-brown", bgcolor: "bg-[#8B4513]", color: "#8B4513" },
+  ];
+
+  const { theme, setTheme } = useContext(ThemeContext);
+
   const menu = [
     { id: 1, name: "Overview", icon: <Icon.Overview />, link: "/" },
     { id: 2, name: "Balances", icon: <Icon.Balance />, link: "/balance" },
-    { id: 3, name: "Transaction", icon: <Icon.Transaction />, link: "/transaction", },
+    { id: 3, name: "Transaction", icon: <Icon.Transaction />, link: "/transaction" },
     { id: 4, name: "Bills", icon: <Icon.Bill />, link: "/bill" },
     { id: 5, name: "Expenses", icon: <Icon.Expense />, link: "/expense" },
     { id: 6, name: "Goals", icon: <Icon.Goal />, link: "/goal" },
@@ -19,72 +30,92 @@ function MainLayout(props) {
   ];
 
   return (
-    <div className="flex min-h-screen">
+    <div className={`flex min-h-screen ${theme.name}`}>
       {/* Sidebar */}
       <aside className="bg-defaultBlack w-28 sm:w-64 text-special-bg2 flex flex-col justify-between px-7 py-12">
-        
-        {/* Atas */}
+        {/* ================== Atas ================== */}
         <div>
-        <div className="mb-10">
-          <Logo variant="secondary" />
-        </div>
-        <nav>
-          {menu.map((item) => (
-            <NavLink
-              key={item.id}
-              to={item.link}
-              
-              className={({ isActive }) =>
-                `flex px-4 py-3 rounded-md hover:text-white hover:font-bold hover:scale-105 ${
-                  isActive
-                    ? "bg-primary text-white font-bold"
-                    : "hover:bg-special-bg3"
-                }`
-              }
-            >
-              <div className="mx-auto sm:mx-0">
-                {item.icon}
-              </div>
-
-              <div className="ms-3 hidden sm:block">
-                {item.name}
-              </div>
-            </NavLink>
-          ))}
-        </nav>
-        </div>
-
-        {/* Bawah */}
-        <div>
-          <div className="flex bg-special-bg3 text-white px-4 py-3 rounded-md">
-            <div className="flex bg-special-bg3 text-white px-4 py-3 rounded-md">
-            <div className="mx-auto sm:mx-0">
-              <Icon.Logout />
-            </div>
-                <div className="ms-3 hidden sm:block">Logout</div>
-              </div>
+          <div className="mb-10">
+            <Logo variant="secondary" />
           </div>
 
-          <div className="border my-10 border-special-bg"></div>
+          <nav>
+            {menu.map((item) => (
+              <NavLink
+                key={item.id}
+                to={item.link}
+                className={({ isActive }) =>
+                  `flex px-4 py-3 rounded-md hover:text-white hover:font-bold hover:scale-105 ${
+                    isActive
+                      ? "bg-primary text-white font-bold"
+                      : "hover:bg-special-bg3"
+                  }`
+                }
+              >
+                <div className="mx-auto sm:mx-0">{item.icon}</div>
 
-          <div className="flex justify-between items-center">
-              <div>Avatar</div>
-              <div className="hidden sm:block">
-                Username
-                <br />
-                View Profile
-              </div>
-              <div className="hidden sm:block">
-                <Icon.Detail size={15} />
+                <div className="ms-3 hidden sm:block">
+                  {item.name}
+                </div>
+              </NavLink>
+            ))}
+          </nav>
+        </div>
+
+        {/* ================== Bawah ================== */}
+        <div>
+          {/* Theme */}
+          <div className="mb-8">
+            <div className="mb-2 text-sm">Themes</div>
+
+            <div className="flex flex-wrap gap-2">
+              {themes.map((t) => (
+                <div
+                  key={t.name}
+                  className={`${t.bgcolor} w-6 h-6 rounded-md cursor-pointer`}
+                  onClick={() => setTheme(t)}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Logout */}
+          <NavLink to="/login">
+            <div className="flex bg-special-bg3 px-4 py-3 rounded-md">
+              <div className="flex items-center">
+                <div className="mx-auto sm:mx-0">
+                  <Icon.Logout color={theme.color} />
+                </div>
+
+                <div className="ms-3 hidden sm:block text-white">
+                  Logout
+                </div>
               </div>
             </div>
+          </NavLink>
+
+          <div className="border my-8 border-special-bg"></div>
+
+          {/* Profile */}
+          <div className="flex justify-between items-center">
+            <div>Avatar</div>
+
+            <div className="hidden sm:block">
+              Username
+              <br />
+              View Profile
+            </div>
+
+            <div className="hidden sm:block">
+              <Icon.Detail size={15} />
+            </div>
+          </div>
         </div>
       </aside>
 
+      {/* ================== Main ================== */}
       <div className="bg-special-mainBg flex-1 flex flex-col">
-
         <header className="border-b border-gray-05 px-6 py-7 flex justify-between items-center">
-
           {/* kiri */}
           <div className="flex items-center">
             <div className="font-bold text-2xl me-6">
@@ -99,16 +130,14 @@ function MainLayout(props) {
 
           {/* kanan */}
           <div className="flex items-center">
-          <div className="flex items-center">
-          <div className="me-10">
-            <NotificationsIcon className="text-gray-01 scale-110"/>
-          </div>
-
-      <Input
-        backgroundColor="bg-white"
-        border="border-white"
-      />
-    </div>
+            <div className="me-10">
+              <NotificationsIcon
+                sx={{
+                  color: theme.color,
+                  fontSize: 28,
+                }}
+              />
+            </div>
 
             <div className="w-48">
               <Input
@@ -118,13 +147,11 @@ function MainLayout(props) {
               />
             </div>
           </div>
-
         </header>
 
         <main className="flex-1 px-6 py-4">
           {children}
         </main>
-
       </div>
     </div>
   );
