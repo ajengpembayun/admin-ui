@@ -5,6 +5,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import Icon from "../Icon";
 import { NavLink } from "react-router-dom";
 
+
 function MainLayout(props) {
   const { children } = props;
   const menu = [
