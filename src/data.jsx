@@ -6,7 +6,7 @@ export const bills = [
     name: "Figma - Yearly Plan",
     description:
       "For advanced security and more flexible controls, the Proffesional plans help you scale design process company-wide.",
-    icon: <Icon.Figma />,
+      icon: <Icon.Figma />,
     date: "15",
     month: "May",
     lastCharge: "2022-05-14",
@@ -17,7 +17,7 @@ export const bills = [
     name: "Adobe Inc - Yearly Plan",
     description:
       "For advanced security and more flexible controls, the Proffesional plans help you scale design process company-wide.",
-    icon: <Icon.Adobe />,
+      icon: <Icon.Adobe />,
     date: "16",
     month: "June",
     lastCharge: "2022-06-17",

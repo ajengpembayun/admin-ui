@@ -37,3 +37,30 @@ body {
   margin: 0;
   font-family: var(--font-body);
 }
+
+.dark {
+  background: #2d2d2d;
+  color: white;
+}
+
+.dark .bg-white {
+  background: #3b3b3b !important;
+}
+
+.dark .text-black {
+  color: white !important;
+}
+
+.dark .border-white {
+  border-color: #555 !important;
+}
+
+.dark input {
+  background: #444 !important;
+  color: white !important;
+  border-color: #666 !important;
+}
+
+.dark input::placeholder {
+  color: #bbb;
+}

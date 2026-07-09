@@ -1,25 +1,31 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ModeContext } from "../context/modeContext";
 
 function Input(props) {
   const {
     id,
-    icon = false,
     backgroundColor = false,
     border = "border-gray-03",
     ...rest
   } = props;
 
+  const { darkMode } = useContext(ModeContext);
+
   return (
-    <>
-      <input
-        className={`py-3 pl-4 text-sm rounded-md w-full border text-gray-01 
-          ${border} focus:border-black focus:outline-none focus:ring-0 
-          ${backgroundColor || ""}
-        `}
-        id={id}
-        {...rest}
-      />
-    </>
+    <input
+      id={id}
+      className={`
+        py-3 pl-4 text-sm rounded-md w-full border
+        ${border}
+        ${backgroundColor || ""}
+        ${
+          darkMode
+            ? "bg-[#3b3b3b] text-white border-gray-500 placeholder:text-gray-400"
+            : "bg-white text-black"
+        }
+      `}
+      {...rest}
+    />
   );
 }
 

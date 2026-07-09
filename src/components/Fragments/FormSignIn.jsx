@@ -1,4 +1,5 @@
-import React from "react";
+import { useContext } from "react";
+import { ModeContext } from "../../context/modeContext";
 import LabeledInput from "../LabeledInput";
 import CheckBox from "../CheckBox";
 import Button from "../Button";
@@ -16,6 +17,7 @@ const SignInSchema = Yup.object().shape({
 });
 
 function FormSignIn({ onSubmit }) {
+  const { darkMode, toggleMode } = useContext(ModeContext);
   return (
     <>
       <Formik
@@ -155,6 +157,16 @@ function FormSignIn({ onSubmit }) {
         >
           Create an account
         </Link>
+      </div>
+      
+      <div className="flex justify-center mt-6">
+        <button
+          type="button"
+          onClick={toggleMode}
+          className="border px-4 py-2 rounded-md text-sm"
+        >
+          {darkMode ? "☀ Light Mode" : "🌙 Dark Mode"}
+        </button>
       </div>
     </>
   );

@@ -78,12 +78,20 @@ const Icon = {
     />
   ),
 
-  Adobe: ({ size = 24, color = "currentColor", ...props }) => (
-    <AdobeSVG width={size} height={size} stroke={color} {...props} />
+  Adobe: ({ size = 24, ...props }) => (
+    <AdobeSVG
+      width={size}
+      height={size}
+      {...props}
+    />
   ),
-
-  Figma: ({ size = 24, color = "currentColor", ...props }) => (
-    <FigmaSVG width={size} height={size} stroke={color} {...props} />
+  
+  Figma: ({ size = 24, ...props }) => (
+    <FigmaSVG
+      width={size}
+      height={size}
+      {...props}
+    />
   ),
 
   Food: ({ size = 24, color = "currentColor", ...props }) => (
