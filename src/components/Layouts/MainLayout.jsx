@@ -5,6 +5,8 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import Icon from "../Icon";
 import { NavLink } from "react-router-dom";
 import { ThemeContext } from "../../context/themeContext";
+import { AuthContext } from "../../context/authContext";
+import { logoutService } from "../../services/authService";
 
 function MainLayout(props) {
   const { children } = props;
@@ -18,6 +20,19 @@ function MainLayout(props) {
   ];
 
   const { theme, setTheme } = useContext(ThemeContext);
+  const { user, logout } = useContext(AuthContext);
+  const handleLogout = async () => {
+    try {
+      await logoutService();
+      logout();
+    } catch (err) {
+      console.error(err);
+  
+      if (err.status === 401) {
+        logout();
+      }
+    }
+  };
 
   const menu = [
     { id: 1, name: "Overview", icon: <Icon.Overview />, link: "/" },
@@ -80,7 +95,10 @@ function MainLayout(props) {
           </div>
 
           {/* Logout */}
-          <NavLink to="/login">
+          <div
+            onClick={handleLogout}
+            className="cursor-pointer"
+          >
             <div className="flex bg-special-bg3 px-4 py-3 rounded-md">
               <div className="flex items-center">
                 <div className="mx-auto sm:mx-0">
@@ -92,7 +110,7 @@ function MainLayout(props) {
                 </div>
               </div>
             </div>
-          </NavLink>
+          </div>
 
           <div className="border my-8 border-special-bg"></div>
 
@@ -101,9 +119,13 @@ function MainLayout(props) {
             <div>Avatar</div>
 
             <div className="hidden sm:block">
-              Username
-              <br />
-              View Profile
+              <div className="font-semibold">
+                {user?.name}
+              </div>
+
+              <div className="text-sm text-gray-400">
+                View Profile
+              </div>
             </div>
 
             <div className="hidden sm:block">
@@ -119,7 +141,7 @@ function MainLayout(props) {
           {/* kiri */}
           <div className="flex items-center">
             <div className="font-bold text-2xl me-6">
-              Username
+              {user?.name}
             </div>
 
             <div className="text-gray-03 flex">

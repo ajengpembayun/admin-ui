@@ -1,46 +1,108 @@
+import React from "react";
 import LabeledInput from "../LabeledInput";
 import CheckBox from "../CheckBox";
 import Button from "../Button";
 import { Link } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
-function FormSignIn() {
+const SignInSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Email tidak valid")
+    .required("Email wajib diisi"),
+
+  password: Yup.string()
+    .required("Password wajib diisi"),
+});
+
+function FormSignIn({ onSubmit }) {
   return (
     <>
-      {/* form start */}
-      <div className="text-left">
-        <form>
-          <div className="mb-4">
-            <LabeledInput
-              label="Email address"
-              type="email"
-              placeholder="hello@example.com"
-              name="email"
-              id="email"
-            />
-          </div>
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+          status: false,
+        }}
+        validationSchema={SignInSchema}
+        onSubmit={async (values, { setSubmitting }) => {
+          try {
+            await onSubmit(values.email, values.password);
+          } finally {
+            setSubmitting(false);
+          }
+        }}
+      >
+        {({ isSubmitting }) => (
+          <div className="text-left">
+            <Form>
 
-          <div className="mb-4">
-            <LabeledInput
-              label="Password"
-              type="password"
-              placeholder="************"
-              name="password"
-              id="password"
-            />
-          </div>
+              {/* EMAIL */}
+              <div className="mb-6">
+                <Field name="email">
+                  {({ field }) => (
+                    <LabeledInput
+                      {...field}
+                      id="email"
+                      type="email"
+                      label="Email Address"
+                      placeholder="hello@example.com"
+                    />
+                  )}
+                </Field>
 
-          <div className="mb-4 flex items-center">
-            <CheckBox
-              label="Keep me signed in"
-              id="status"
-              name="status"
-              type="checkbox"
-            />
-          </div>
+                <ErrorMessage
+                  name="email"
+                  component="p"
+                  className="text-red-500 text-xs mt-1"
+                />
+              </div>
 
-          <Button>Login</Button>
-        </form>
-      </div>
+              {/* PASSWORD */}
+              <div className="mb-6">
+                <Field name="password">
+                  {({ field }) => (
+                    <LabeledInput
+                      {...field}
+                      id="password"
+                      type="password"
+                      label="Password"
+                      placeholder="************"
+                    />
+                  )}
+                </Field>
+
+                <ErrorMessage
+                  name="password"
+                  component="p"
+                  className="text-red-500 text-xs mt-1"
+                />
+              </div>
+
+              {/* CHECKBOX */}
+              <div className="mb-4">
+                <Field name="status">
+                  {({ field }) => (
+                    <CheckBox
+                      {...field}
+                      id="status"
+                      type="checkbox"
+                      checked={field.value}
+                      label="Keep me signed in"
+                    />
+                  )}
+                </Field>
+              </div>
+
+              {/* BUTTON */}
+              <Button>
+                {isSubmitting ? "Loading..." : "Login"}
+              </Button>
+
+            </Form>
+          </div>
+        )}
+      </Formik>
 
       {/* divider */}
       <div className="my-6 flex items-center text-[10px] text-gray-03">
@@ -53,12 +115,9 @@ function FormSignIn() {
         <div className="flex-1 border-t border-gray-05"></div>
       </div>
 
-      {/* google button */}
+      {/* Google */}
       <div className="mb-6">
-        <Button
-          type="button"
-          variant="secondary"
-        >
+        <Button type="button" variant="secondary">
           <span className="flex items-center justify-center">
             <svg
               className="h-5 w-5 mr-2"
@@ -88,11 +147,11 @@ function FormSignIn() {
         </Button>
       </div>
 
-      {/* link */}
+      {/* Register */}
       <div className="flex justify-center">
         <Link
           to="/register"
-          className="text-[var(--color-primary)] text-xs font-bold cursor-pointer hover:opacity-80"
+          className="text-[var(--color-primary)] text-xs font-bold hover:opacity-80"
         >
           Create an account
         </Link>
